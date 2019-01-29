@@ -14,7 +14,7 @@ class Tetris(object):
     ]
 
     def __init__(self):
-        self.height = 8
+        self.height = 20
         self.width = 20
         self.init_board()
         self.add_shape()
@@ -37,11 +37,6 @@ class Tetris(object):
                 move = input(
                     "Make your move [w (counter), a (left), "
                     "s (clockwise), d (right), q (quit)]:")
-                if move == "f":
-                    print("Fix")
-                    self.fix_shape()
-                    self.add_shape()
-                    break
                 if move == "q":
                     sys.exit("Bye!")
                 if move == "s":
@@ -98,8 +93,10 @@ class Tetris(object):
         return False
 
     def valid_move_possible(self):
-        return any([self.rotate_shape(1,0), self.rotate_shape(-1,0),
-                self.move_shape(-1,0), self.move_shape(1,0)])
+        return any([self.rotate_shape(1, commit=0),
+                self.rotate_shape(-1, commit=0),
+                self.move_shape(-1, commit=0),
+                self.move_shape(1, commit=0)])
 
     def add_shape(self):
         self.shape = {"height": self.height-1,
